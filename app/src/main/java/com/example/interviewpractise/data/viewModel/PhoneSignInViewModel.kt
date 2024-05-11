@@ -1,10 +1,10 @@
-package com.example.interviewpractise.presentation.activties
+package com.example.interviewpractise.data.viewModel
 
 import android.app.Activity
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.example.interviewpractise.domain.repository.PhoneSignInRepository
-import com.example.interviewpractise.presentation.OnStateChanged
+import com.example.interviewpractise.domain.repository.OnStateChanged
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
@@ -25,9 +25,6 @@ class PhoneSignInViewModel @Inject constructor(
     var onStateChanged: OnStateChanged? = null
     private var storedVerificationId: String? = ""
     private lateinit var resendToken: PhoneAuthProvider.ForceResendingToken
-
-
-
 
 
     fun verifyPhoneNumberWithCode(code: String) {

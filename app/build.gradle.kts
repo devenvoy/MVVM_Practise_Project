@@ -4,6 +4,9 @@ plugins {
     alias(libs.plugins.googleGmsGoogleServices)
     id("com.google.dagger.hilt.android")
     id("kotlin-kapt")
+
+    id("kotlin-parcelize")
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 android {
@@ -37,7 +40,7 @@ android {
     }
 
     buildFeatures {
-        dataBinding = true
+        viewBinding = true
     }
 
 }
@@ -54,8 +57,6 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
 
-// volley
-    implementation("com.android.volley:volley:1.2.1")
 // retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
 // GSON
@@ -72,18 +73,20 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:32.7.1"))
     implementation("com.google.firebase:firebase-auth")
 
-    // Also add the dependency for the Google Play services library and specify its version
-    implementation("com.google.android.gms:play-services-auth:20.7.0")
+//    // Also add the dependency for the Google Play services library and specify its version
+//    implementation("com.google.android.gms:play-services-auth:20.7.0")
 
 //  dependencies injection using hilt
     implementation("com.google.dagger:hilt-android:2.47")
     kapt("com.google.dagger:hilt-android-compiler:2.47")
-    implementation("androidx.activity:activity-ktx:1.9.0")
+//    implementation("androidx.activity:activity-ktx:1.9.0")
 
-//  Navigation
-    val nav_version = "2.7.7"
-    implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
-    implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
+    implementation("androidx.fragment:fragment-ktx:1.7.0")
+
+// Navigation Component
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
+
 
 //  coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0")
@@ -91,6 +94,11 @@ dependencies {
 
 //  coil
     implementation("io.coil-kt:coil:2.6.0")
+
+//    room
+    val roomVersion = "2.1.0"
+    implementation("androidx.room:room-runtime:$roomVersion")
+    kapt("androidx.room:room-compiler:$roomVersion")
 
 }
 kapt {

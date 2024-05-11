@@ -1,11 +1,9 @@
 package com.example.interviewpractise.domain.repository
 
-import com.example.interviewpractise.data.models.Products
-import com.example.interviewpractise.data.models.ProductsResponse
-import retrofit2.Response
+import com.example.interviewpractise.data.models.Product
 
 interface RetrofitFragmentRepository {
 
-    suspend fun makeApiCall(): ArrayList<Products>
+    suspend fun makeApiCall(): ArrayList<Product>
 
 }

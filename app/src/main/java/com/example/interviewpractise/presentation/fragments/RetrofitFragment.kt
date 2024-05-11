@@ -7,7 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.GridLayoutManager
+import com.example.interviewpractise.data.viewModel.RetrofitViewModel
 import com.example.interviewpractise.databinding.FragmentRetrofitBinding
+import com.example.interviewpractise.domain.repository.ResponseListener
 import com.example.interviewpractise.presentation.adapters.ProductsRecyclerAdapter
 import com.example.interviewpractise.utils.toast
 import dagger.hilt.android.AndroidEntryPoint
@@ -36,7 +39,11 @@ class RetrofitFragment : Fragment(), ResponseListener {
         myViewModel.response.observe(viewLifecycleOwner) {
             val productsRecyclerAdapter =
                 ProductsRecyclerAdapter(activity = requireActivity(), it)
-            binding.recyclerView.adapter = productsRecyclerAdapter
+
+            binding.recyclerView.apply {
+                layoutManager = GridLayoutManager(activity, 2)
+                adapter = productsRecyclerAdapter
+            }
         }
 
         myViewModel.updateData()
@@ -44,16 +51,16 @@ class RetrofitFragment : Fragment(), ResponseListener {
 
     override fun onStarted() {
         binding.progrssbar.visibility = View.VISIBLE
-        activity?.toast("Process Started")
+//        activity?.toast("Process Started")
     }
 
     override fun onSuccess() {
         binding.progrssbar.visibility = View.GONE
-        activity?.toast("Process Success")
+//        activity?.toast("Process Success")
     }
 
     override fun onFailure() {
-        binding.progrssbar.visibility = View.GONE
+//        binding.progrssbar.visibility = View.GONE
         activity?.toast("Process Failed")
     }
 

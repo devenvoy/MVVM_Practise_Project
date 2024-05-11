@@ -1,4 +1,4 @@
-package com.example.interviewpractise.presentation.fragments
+package com.example.interviewpractise.domain.repository
 
 interface ResponseListener {
     fun onStarted()

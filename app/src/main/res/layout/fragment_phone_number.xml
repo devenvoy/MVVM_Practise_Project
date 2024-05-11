@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.activity.PhoneSignInActivity">
+    tools:context=".presentation.fragments.PhoneNumberFragment">
 
 
     <com.google.android.material.textfield.TextInputLayout
@@ -26,6 +23,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.4"
         app:prefixText="+91"
         app:prefixTextColor="@color/black">
 
@@ -41,46 +39,6 @@
     </com.google.android.material.textfield.TextInputLayout>
 
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/otp_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="30dp"
-        android:hint="Enter Otp"
-        android:textColorHint="@color/black"
-        android:visibility="gone"
-        app:boxStrokeColor="@color/black"
-        app:cursorColor="@color/black"
-        app:endIconMode="clear_text"
-        app:endIconTint="#80FFFFFF"
-        app:hintTextColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <requestFocus />
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/submit_otp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textColor="@color/black" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/resend_otp"
-        style="@style/Widget.Material3.Button.TextButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="11dp"
-        android:layout_marginEnd="4dp"
-        android:text="Resend Otp"
-        android:textColor="#2196F3"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="@+id/otp_layout"
-        app:layout_constraintTop_toBottomOf="@+id/otp_layout" />
-
     <com.google.android.material.button.MaterialButton
         android:id="@+id/generate_otp"
         style="@style/Widget.Material3.Button.ElevatedButton"
@@ -91,11 +49,24 @@
         android:backgroundTint="#95D5F3"
         android:paddingVertical="10dp"
         android:shadowColor="#F44336"
-        android:shadowRadius="@integer/material_motion_duration_long_1"
         android:text="Generate OTP"
         android:textColor="@color/black"
         android:textSize="18sp"
         app:cornerRadius="12dp"
         app:layout_constraintTop_toBottomOf="@+id/number_layout" />
+
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/primary"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/generate_otp" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

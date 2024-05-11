@@ -1,11 +1,12 @@
-package com.example.interviewpractise.presentation.fragments
+package com.example.interviewpractise.data.viewModel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.interviewpractise.data.models.Products
+import com.example.interviewpractise.data.models.Product
 import com.example.interviewpractise.domain.repository.RetrofitFragmentRepository
+import com.example.interviewpractise.domain.repository.ResponseListener
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -17,9 +18,9 @@ class RetrofitViewModel @Inject constructor(
 
     var responseListener: ResponseListener? = null
 
-    private var _responseBody = MutableLiveData<List<Products>>()
+    private var _responseBody = MutableLiveData<List<Product>>()
 
-    val response: LiveData<List<Products>>
+    val response: LiveData<List<Product>>
         get() = _responseBody
 
     fun updateData() {

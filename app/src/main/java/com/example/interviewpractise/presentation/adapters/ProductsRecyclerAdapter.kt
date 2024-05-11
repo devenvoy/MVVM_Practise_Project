@@ -8,14 +8,14 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.RoundedCornersTransformation
 import com.example.interviewpractise.R
-import com.example.interviewpractise.data.models.Products
+import com.example.interviewpractise.data.models.Product
 import com.example.interviewpractise.databinding.ProductItemBinding
 
-class ProductsRecyclerAdapter(val activity: Activity, private val productList: List<Products>) :
+class ProductsRecyclerAdapter(val activity: Activity, private val productList: List<Product>) :
     RecyclerView.Adapter<ProductsRecyclerAdapter.MyViewHolder>() {
 
     class MyViewHolder(val binding: ProductItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun onBind(product: Products) {
+        fun onBind(product: Product) {
             binding.imageView.load(product.thumbnail) {
                 crossfade(true)
                 crossfade(300)

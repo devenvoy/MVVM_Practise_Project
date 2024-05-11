@@ -1,4 +1,4 @@
-package com.example.interviewpractise.presentation.activties
+package com.example.interviewpractise.presentation.activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,18 +6,20 @@ import android.os.CountDownTimer
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.example.interviewpractise.data.viewModel.PhoneSignInViewModel
 import com.example.interviewpractise.databinding.ActivityPhoneSignInBinding
-import com.example.interviewpractise.presentation.OnStateChanged
+import com.example.interviewpractise.domain.repository.OnStateChanged
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class PhoneSignInActivity : AppCompatActivity() {
 
+    //
     private val binding: ActivityPhoneSignInBinding by lazy {
         ActivityPhoneSignInBinding.inflate(layoutInflater)
     }
 
-
+//
     private val viewModel: PhoneSignInViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,12 +59,6 @@ class PhoneSignInActivity : AppCompatActivity() {
             }
 
             override fun onLoginSuccess(message: String) {
-                startActivity(
-                    Intent(
-                        this@PhoneSignInActivity,
-                        MainActivity::class.java
-                    )
-                )
             }
         }
     }
@@ -82,18 +78,5 @@ class PhoneSignInActivity : AppCompatActivity() {
         }
         countdown.start()
     }
-
-    override fun onStart() {
-        super.onStart()
-        if (viewModel.auth.currentUser != null) {
-            startActivity(
-                Intent(
-                    this@PhoneSignInActivity,
-                    MainActivity::class.java
-                )
-            )
-        }
-    }
-
 
 }

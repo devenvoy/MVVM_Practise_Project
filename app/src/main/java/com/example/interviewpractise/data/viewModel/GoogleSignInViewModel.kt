@@ -1,15 +1,14 @@
-package com.example.interviewpractise.presentation.activties
+package com.example.interviewpractise.data.viewModel
 
 import android.app.Activity
 import android.util.Log
 import androidx.lifecycle.ViewModel
-import com.example.interviewpractise.presentation.OnStateChanged
+import com.example.interviewpractise.domain.repository.OnStateChanged
 import com.example.interviewpractise.utils.REQUEST_ID_TOKEN
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import dagger.hilt.android.lifecycle.HiltViewModel
 
 class GoogleSignInViewModel : ViewModel() {
 

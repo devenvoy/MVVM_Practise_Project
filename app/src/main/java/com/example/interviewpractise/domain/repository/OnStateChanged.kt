@@ -1,4 +1,4 @@
-package com.example.interviewpractise.presentation
+package com.example.interviewpractise.domain.repository
 
 interface OnStateChanged {
 
