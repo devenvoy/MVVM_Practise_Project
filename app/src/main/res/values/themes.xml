@@ -3,6 +3,7 @@
     <style name="Base.Theme.InterviewPractise" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <item name="colorPrimary">@color/primary</item>
+        <item name="android:textColorSecondary">@android:color/white</item>
         <item name="android:statusBarColor">@color/primary</item>
     </style>
 

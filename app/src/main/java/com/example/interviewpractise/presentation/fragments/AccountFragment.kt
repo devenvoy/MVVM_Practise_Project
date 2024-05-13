@@ -9,6 +9,9 @@ import androidx.fragment.app.Fragment
 import com.example.interviewpractise.databinding.FragmentAccountBinding
 import com.example.interviewpractise.presentation.activity.MainActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.auth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 
 class AccountFragment : Fragment() {
@@ -27,6 +30,8 @@ class AccountFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        auth = Firebase.auth
 
         binding.logout.setOnClickListener {
             if (auth.currentUser != null) {

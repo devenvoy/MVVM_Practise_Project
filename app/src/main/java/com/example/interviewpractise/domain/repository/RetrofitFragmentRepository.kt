@@ -5,6 +5,12 @@ import retrofit2.Response
 
 interface RetrofitFragmentRepository {
 
-    suspend fun makeApiCall(): Response<ProductsResponse>
+    suspend fun getAllProducts(): Response<ProductsResponse>
+
+    suspend fun getSearchProducts(query: String): Response<ProductsResponse>
+
+    suspend fun getAllCategories(): Response<List<String>>
+
+    suspend fun getProductsFromCategory(cat: String): Response<ProductsResponse>
 
 }

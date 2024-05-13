@@ -13,7 +13,7 @@
         <action
             android:id="@+id/action_phoneNumberFragment_to_otpFragment"
             app:destination="@id/otpFragment"
-            app:popUpTo="@id/otpFragment"
+            app:popUpTo="@id/phoneNumberFragment"
             app:popUpToInclusive="true" />
     </fragment>
     <fragment
@@ -24,12 +24,14 @@
         <argument
             android:name="phone_number"
             app:argType="string" />
+<!--        <argument-->
+<!--            android:name="verificationId"-->
+<!--            app:argType="string" />-->
+<!--        <argument-->
+<!--            android:name="resendtoken"-->
+<!--            app:argType="string" />-->
+
     </fragment>
-    <action
-        android:id="@+id/action_otpFragment_to_retrofitFragment"
-        app:destination="@id/retrofitFragment"
-        app:popUpTo="@id/retrofitFragment"
-        app:popUpToInclusive="true" />
     <fragment
         android:id="@+id/splashScreenFragment"
         android:name="com.example.interviewpractise.presentation.fragments.SplashScreenFragment"
@@ -38,7 +40,7 @@
         <action
             android:id="@+id/action_splashScreenFragment_to_phoneNumberFragment"
             app:destination="@id/phoneNumberFragment"
-            app:popUpTo="@id/phoneNumberFragment"
+            app:popUpTo="@id/splashScreenFragment"
             app:popUpToInclusive="true" />
     </fragment>
 </navigation>

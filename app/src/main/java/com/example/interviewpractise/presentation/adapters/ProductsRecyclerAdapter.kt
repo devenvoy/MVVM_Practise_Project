@@ -8,11 +8,11 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import coil.transform.RoundedCornersTransformation
+import coil.size.Scale
 import com.example.interviewpractise.R
 import com.example.interviewpractise.data.models.Product
 import com.example.interviewpractise.databinding.ProductItemBinding
-import com.example.interviewpractise.presentation.fragments.RetrofitFragmentDirections
+import com.example.interviewpractise.presentation.fragments.ShopFragmentDirections
 
 class ProductsRecyclerAdapter(val activity: Activity) :
     RecyclerView.Adapter<ProductsRecyclerAdapter.MyViewHolder>() {
@@ -38,9 +38,7 @@ class ProductsRecyclerAdapter(val activity: Activity) :
                 crossfade(true)
                 crossfade(300)
                 placeholder(R.drawable.placeholder)
-                transformations(
-                    RoundedCornersTransformation(12f)
-                )
+                scale(Scale.FILL)
             }
             binding.titleText.text = product.title
             binding.titlePrice.text = "₹ ${product.price}"
@@ -62,7 +60,7 @@ class ProductsRecyclerAdapter(val activity: Activity) :
 
         holder.itemView.setOnClickListener {
             it.findNavController().navigate(
-                RetrofitFragmentDirections.actionRetrofitFragmentToProductDetailFragment(
+                ShopFragmentDirections.actionRetrofitFragmentToProductDetailFragment(
                     differ.currentList[position]
                 )
             )

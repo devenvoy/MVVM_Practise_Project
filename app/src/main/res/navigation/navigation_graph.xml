@@ -3,31 +3,35 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/retrofitFragment">
+    app:startDestination="@id/shopFragment">
 
     <fragment
-        android:id="@+id/retrofitFragment"
-        android:name="com.example.interviewpractise.presentation.fragments.RetrofitFragment"
-        android:label="fragment_retrofit"
-        tools:layout="@layout/fragment_retrofit">
+        android:id="@+id/shopFragment"
+        android:name="com.example.interviewpractise.presentation.fragments.ShopFragment"
+        android:label="Shop"
+        tools:layout="@layout/fragment_shop">
         <action
             android:id="@+id/action_retrofitFragment_to_productDetailFragment"
-            app:destination="@id/productDetailFragment" />
+            app:destination="@id/productDetailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/cartFragment"
         android:name="com.example.interviewpractise.presentation.fragments.CartFragment"
-        android:label="fragment_cart"
+        android:label="Cart"
         tools:layout="@layout/fragment_cart" />
     <fragment
         android:id="@+id/accountFragment"
         android:name="com.example.interviewpractise.presentation.fragments.AccountFragment"
-        android:label="fragment_account"
+        android:label="Account"
         tools:layout="@layout/fragment_account" />
     <fragment
         android:id="@+id/productDetailFragment"
         android:name="com.example.interviewpractise.presentation.fragments.ProductDetailFragment"
-        android:label="fragment_product_detail"
+        android:label="Product Detail"
         tools:layout="@layout/fragment_product_detail">
 
         <argument

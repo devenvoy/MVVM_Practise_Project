@@ -23,8 +23,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <requestFocus />
-
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edt_otp"
             android:layout_width="match_parent"

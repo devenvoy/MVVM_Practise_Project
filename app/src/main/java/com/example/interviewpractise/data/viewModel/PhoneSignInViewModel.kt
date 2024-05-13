@@ -3,8 +3,8 @@ package com.example.interviewpractise.data.viewModel
 import android.app.Activity
 import android.util.Log
 import androidx.lifecycle.ViewModel
-import com.example.interviewpractise.domain.repository.PhoneSignInRepository
 import com.example.interviewpractise.domain.repository.OnStateChanged
+import com.example.interviewpractise.domain.repository.PhoneSignInRepository
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
@@ -23,8 +23,8 @@ class PhoneSignInViewModel @Inject constructor(
 
     val auth = Firebase.auth
     var onStateChanged: OnStateChanged? = null
-    private var storedVerificationId: String? = ""
-    private lateinit var resendToken: PhoneAuthProvider.ForceResendingToken
+    var storedVerificationId: String? = ""
+    lateinit var resendToken: PhoneAuthProvider.ForceResendingToken
 
 
     fun verifyPhoneNumberWithCode(code: String) {

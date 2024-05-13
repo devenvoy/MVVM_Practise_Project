@@ -36,10 +36,6 @@ object AppModule {
     @Singleton
     fun providesBaseUrl() = BASE_URL
 
-//    @Provides
-//    @Singleton
-//    fun providesGson() = GsonBuilder().setLenient().create()
-
 
     @Provides
     @Singleton

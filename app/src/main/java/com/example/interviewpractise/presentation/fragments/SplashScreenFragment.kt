@@ -50,7 +50,7 @@ class SplashScreenFragment : Fragment() {
                         SplashScreenFragmentDirections.actionSplashScreenFragmentToPhoneNumberFragment()
                     )
                 }
-            }, 2000
+            }, 1000
         )
     }
 }

@@ -100,6 +100,9 @@ dependencies {
     implementation("androidx.room:room-runtime:$roomVersion")
     kapt("androidx.room:room-compiler:$roomVersion")
 
+    // dots
+    implementation("com.tbuonomo:dotsindicator:5.0")
+
 }
 kapt {
     correctErrorTypes = true

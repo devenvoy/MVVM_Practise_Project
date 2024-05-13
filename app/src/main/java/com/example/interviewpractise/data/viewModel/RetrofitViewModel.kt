@@ -23,10 +23,23 @@ class RetrofitViewModel @Inject constructor(
     val productsResponse: LiveData<List<Product>>
         get() = _productsResponse
 
-    fun updateData() {
+    fun getAllData() {
         responseListener?.onStarted()
         viewModelScope.launch {
-            val response = retrofitFragmentRepository.makeApiCall()
+            val response = retrofitFragmentRepository.getAllProducts()
+            if (response.code() == 200) {
+                _productsResponse.value = response.body()!!.products
+                responseListener?.onSuccess()
+            } else {
+                responseListener?.onFailure(response.code().toString() + response.message())
+            }
+        }
+    }
+
+    fun searchProduct(query: String) {
+        responseListener?.onStarted()
+        viewModelScope.launch {
+            val response = retrofitFragmentRepository.getSearchProducts(query)
             if (response.code() == 200) {
                 _productsResponse.value = response.body()!!.products
                 responseListener?.onSuccess()
