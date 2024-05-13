@@ -49,7 +49,7 @@ class PhoneSignInViewModel @Inject constructor(
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     Log.d("TAG111", "signInWithCredential:success")
-                    val user = task.result?.user
+//                    val user = task.result?.user
 
                     onStateChanged?.onLoginSuccess("Authentication Success")
 

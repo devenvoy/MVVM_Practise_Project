@@ -18,6 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class RetrofitFragment : Fragment(), ResponseListener {
 
+    private lateinit var productsRecyclerAdapter: ProductsRecyclerAdapter
     private lateinit var binding: FragmentRetrofitBinding
 
     private val myViewModel: RetrofitViewModel by viewModels()
@@ -35,15 +36,15 @@ class RetrofitFragment : Fragment(), ResponseListener {
         Log.d("TAG++", "onViewCreated: ")
 
         myViewModel.responseListener = this
+        productsRecyclerAdapter =
+            ProductsRecyclerAdapter(requireActivity())
+        binding.recyclerView.apply {
+            layoutManager = GridLayoutManager(activity, 2)
+            adapter = productsRecyclerAdapter
+        }
 
-        myViewModel.response.observe(viewLifecycleOwner) {
-            val productsRecyclerAdapter =
-                ProductsRecyclerAdapter(activity = requireActivity(), it)
-
-            binding.recyclerView.apply {
-                layoutManager = GridLayoutManager(activity, 2)
-                adapter = productsRecyclerAdapter
-            }
+        myViewModel.productsResponse.observe(viewLifecycleOwner) {
+            productsRecyclerAdapter.differ.submitList(it)
         }
 
         myViewModel.updateData()
@@ -56,12 +57,12 @@ class RetrofitFragment : Fragment(), ResponseListener {
 
     override fun onSuccess() {
         binding.progrssbar.visibility = View.GONE
-//        activity?.toast("Process Success")
+        activity?.toast("Process Success")
     }
 
-    override fun onFailure() {
-//        binding.progrssbar.visibility = View.GONE
-        activity?.toast("Process Failed")
+    override fun onFailure(message: String?) {
+        binding.progrssbar.visibility = View.GONE
+        activity?.toast(message ?: "Process Failed")
     }
 
 }

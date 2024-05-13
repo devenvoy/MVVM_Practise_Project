@@ -53,6 +53,6 @@ data class Product(
 
     @SerializedName("images")
     @ColumnInfo(name = "images")
-    var images: ArrayList<String> = arrayListOf()
+    var images: List<String> = listOf()
 
 ) : Parcelable

@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.interviewpractise.data.models.Product
-import com.example.interviewpractise.domain.repository.RetrofitFragmentRepository
 import com.example.interviewpractise.domain.repository.ResponseListener
+import com.example.interviewpractise.domain.repository.RetrofitFragmentRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -18,21 +18,22 @@ class RetrofitViewModel @Inject constructor(
 
     var responseListener: ResponseListener? = null
 
-    private var _responseBody = MutableLiveData<List<Product>>()
+    private var _productsResponse = MutableLiveData<List<Product>>()
 
-    val response: LiveData<List<Product>>
-        get() = _responseBody
+    val productsResponse: LiveData<List<Product>>
+        get() = _productsResponse
 
     fun updateData() {
         responseListener?.onStarted()
         viewModelScope.launch {
-            _responseBody.postValue(retrofitFragmentRepository.makeApiCall())
-        }
-        if (response.value != null) {
-            responseListener?.onSuccess()
-        } else {
-            responseListener?.onFailure()
+            val response = retrofitFragmentRepository.makeApiCall()
+            if (response.code() == 200) {
+                _productsResponse.value = response.body()!!.products
+                responseListener?.onSuccess()
+            } else {
+                responseListener?.onFailure(response.code().toString() + response.message())
+            }
         }
     }
-
 }
+

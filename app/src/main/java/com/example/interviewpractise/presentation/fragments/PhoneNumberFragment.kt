@@ -22,6 +22,8 @@ class PhoneNumberFragment : Fragment(), OnStateChanged {
 
     private lateinit var phoneNumber: String
 
+    private lateinit var phoneView: View
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,6 +37,8 @@ class PhoneNumberFragment : Fragment(), OnStateChanged {
         super.onViewCreated(view, savedInstanceState)
 
         phoneSignInViewModel.onStateChanged = this
+
+        phoneView = view
 
         binding.generateOtp.setOnClickListener {
             phoneNumber = "+91${binding.edtPhone.text}"
@@ -55,6 +59,4 @@ class PhoneNumberFragment : Fragment(), OnStateChanged {
     override fun onLoginSuccess(message: String) {
 
     }
-
-
 }

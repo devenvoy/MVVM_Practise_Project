@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/splashScreenFragment">
-
+    app:startDestination="@id/retrofitFragment">
 
     <fragment
         android:id="@+id/retrofitFragment"
@@ -12,83 +11,29 @@
         android:label="fragment_retrofit"
         tools:layout="@layout/fragment_retrofit">
         <action
-            android:id="@+id/action_retrofitFragment_to_cartFragment"
-            app:destination="@id/cartFragment" />
-        <action
             android:id="@+id/action_retrofitFragment_to_productDetailFragment"
             app:destination="@id/productDetailFragment" />
-        <action
-            android:id="@+id/action_retrofitFragment_to_orderFragment"
-            app:destination="@id/orderFragment" />
     </fragment>
-
-
-    <fragment
-        android:id="@+id/phoneNumberFragment"
-        android:name="com.example.interviewpractise.presentation.fragments.PhoneNumberFragment"
-        android:label="fragment_phone_number"
-        tools:layout="@layout/fragment_phone_number">
-        <action
-            android:id="@+id/action_phoneNumberFragment_to_otpFragment"
-            app:destination="@id/otpFragment"
-            app:popUpTo="@id/otpFragment"
-            app:popUpToInclusive="true" />
-    </fragment>
-
-
-    <fragment
-        android:id="@+id/otpFragment"
-        android:name="com.example.interviewpractise.presentation.fragments.OtpFragment"
-        android:label="fragment_otp"
-        tools:layout="@layout/fragment_otp">
-        <action
-            android:id="@+id/action_otpFragment_to_retrofitFragment"
-            app:destination="@id/retrofitFragment"
-            app:popUpTo="@id/retrofitFragment"
-            app:popUpToInclusive="true" />
-
-        <argument
-            android:name="phone_number"
-            app:argType="string" />
-    </fragment>
-
-
     <fragment
         android:id="@+id/cartFragment"
         android:name="com.example.interviewpractise.presentation.fragments.CartFragment"
         android:label="fragment_cart"
         tools:layout="@layout/fragment_cart" />
     <fragment
-        android:id="@+id/orderFragment"
-        android:name="com.example.interviewpractise.presentation.fragments.OrderFragment"
-        android:label="fragment_order"
-        tools:layout="@layout/fragment_order" />
+        android:id="@+id/accountFragment"
+        android:name="com.example.interviewpractise.presentation.fragments.AccountFragment"
+        android:label="fragment_account"
+        tools:layout="@layout/fragment_account" />
     <fragment
         android:id="@+id/productDetailFragment"
         android:name="com.example.interviewpractise.presentation.fragments.ProductDetailFragment"
         android:label="fragment_product_detail"
         tools:layout="@layout/fragment_product_detail">
+
         <argument
             android:name="product_item"
             app:argType="com.example.interviewpractise.data.models.Product"
             app:nullable="true" />
-    </fragment>
-    <fragment
-        android:id="@+id/splashScreenFragment"
-        android:name="com.example.interviewpractise.presentation.fragments.SplashScreenFragment"
-        android:label="fragment_splash_screen"
-        tools:layout="@layout/fragment_splash_screen">
-        <action
-            android:id="@+id/action_splashScreenFragment_to_phoneNumberFragment"
-            app:destination="@id/phoneNumberFragment"
-            app:popUpTo="@id/phoneNumberFragment"
-            app:popUpToInclusive="true" />
-        <action
-            android:id="@+id/action_splashScreenFragment_to_retrofitFragment"
-            app:destination="@id/retrofitFragment"
-            app:popUpTo="@id/retrofitFragment"
-            app:popUpToInclusive="true" />
-    </fragment>
 
-
+    </fragment>
 </navigation>

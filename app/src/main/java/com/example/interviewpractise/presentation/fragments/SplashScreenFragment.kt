@@ -1,5 +1,7 @@
 package com.example.interviewpractise.presentation.fragments
 
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -9,10 +11,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.example.interviewpractise.databinding.FragmentSplashScreenBinding
+import com.example.interviewpractise.presentation.activity.HomeActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
+@SuppressLint("CustomSplashScreen")
 class SplashScreenFragment : Fragment() {
 
     private lateinit var binding: FragmentSplashScreenBinding
@@ -37,9 +41,10 @@ class SplashScreenFragment : Fragment() {
         Handler(Looper.getMainLooper()).postDelayed(
             {
                 if (auth.currentUser != null) {
-                    navController.navigate(
-                        SplashScreenFragmentDirections.actionSplashScreenFragmentToRetrofitFragment()
-                    )
+                    Intent(requireActivity(), HomeActivity::class.java).also {
+                        requireActivity().startActivity(it)
+                        requireActivity().finish()
+                    }
                 } else {
                     navController.navigate(
                         SplashScreenFragmentDirections.actionSplashScreenFragmentToPhoneNumberFragment()
