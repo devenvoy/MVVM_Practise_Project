@@ -14,6 +14,7 @@ import com.example.interviewpractise.data.viewModel.PhoneSignInViewModel
 import com.example.interviewpractise.databinding.FragmentOtpBinding
 import com.example.interviewpractise.domain.repository.OnStateChanged
 import com.example.interviewpractise.presentation.activity.HomeActivity
+import com.example.interviewpractise.utils.toast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -87,10 +88,15 @@ class OtpFragment : Fragment(), OnStateChanged {
         Toast.makeText(activity, "Enter Otp", Toast.LENGTH_SHORT).show()
     }
 
+    override fun onFailure(message: String) {
+        activity?.toast(message)
+        activity?.finish()
+    }
+
     override fun onLoginSuccess(message: String) {
         Intent(requireActivity(), HomeActivity::class.java).also {
             requireActivity().startActivity(it)
-            requireActivity().finish()
+            requireActivity().finishAffinity()
         }
     }
 }

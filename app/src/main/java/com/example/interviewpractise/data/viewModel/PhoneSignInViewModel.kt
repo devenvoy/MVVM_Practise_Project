@@ -24,14 +24,19 @@ class PhoneSignInViewModel @Inject constructor(
     val auth = Firebase.auth
     var onStateChanged: OnStateChanged? = null
     var storedVerificationId: String? = ""
-    lateinit var resendToken: PhoneAuthProvider.ForceResendingToken
+    var resendToken: PhoneAuthProvider.ForceResendingToken? = null
 
 
     fun verifyPhoneNumberWithCode(code: String) {
         // [START verify_with_code]
-        val credential = PhoneAuthProvider.getCredential(storedVerificationId!!, code)
+        val credential: PhoneAuthCredential
+        if (storedVerificationId != null) {
+            credential = PhoneAuthProvider.getCredential(storedVerificationId!!, code)
+            signInWithPhoneAuthCredential(credential = credential)
+        } else {
+            onStateChanged?.onFailure("Please Try Again Later")
+        }
 
-        signInWithPhoneAuthCredential(credential = credential)
         // [END verify_with_code]
     }
 
@@ -114,12 +119,15 @@ class PhoneSignInViewModel @Inject constructor(
     fun resendVerificationCode(
         phoneNumber: String,
     ) {
-        phoneSignInRepository.resendVerificationCode(
-            auth = auth,
-            phoneNumber = phoneNumber,
-            resendToken = resendToken,
-            callbacks = callbacks
-        )
+        if (resendToken != null) {
+            phoneSignInRepository.resendVerificationCode(
+                auth = auth,
+                phoneNumber = phoneNumber,
+                resendToken = resendToken!!,
+                callbacks = callbacks
+            )
+        } else {
+            onStateChanged?.onFailure("Try again Later")
+        }
     }
-
 }

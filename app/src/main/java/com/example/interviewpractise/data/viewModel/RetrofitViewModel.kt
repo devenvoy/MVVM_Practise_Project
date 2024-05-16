@@ -13,7 +13,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RetrofitViewModel @Inject constructor(
-    private val retrofitFragmentRepository: RetrofitFragmentRepository
+    private val retrofitFragmentRepository: RetrofitFragmentRepository,
+    val checkConnection: CheckConnection
 ) : ViewModel() {
 
     var responseListener: ResponseListener? = null
@@ -24,11 +25,11 @@ class RetrofitViewModel @Inject constructor(
         get() = _productsResponse
 
     fun getAllData() {
-        responseListener?.onStarted()
+//        responseListener?.onStarted()
         viewModelScope.launch {
             val response = retrofitFragmentRepository.getAllProducts()
             if (response.code() == 200) {
-                _productsResponse.value = response.body()!!.products
+                _productsResponse.value = response.body()?.products ?: listOf<Product>()
                 responseListener?.onSuccess()
             } else {
                 responseListener?.onFailure(response.code().toString() + response.message())
@@ -41,7 +42,7 @@ class RetrofitViewModel @Inject constructor(
         viewModelScope.launch {
             val response = retrofitFragmentRepository.getSearchProducts(query)
             if (response.code() == 200) {
-                _productsResponse.value = response.body()!!.products
+                _productsResponse.value = response.body()?.products ?: arrayListOf()
                 responseListener?.onSuccess()
             } else {
                 responseListener?.onFailure(response.code().toString() + response.message())

@@ -6,16 +6,22 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.example.interviewpractise.data.models.Product
+import com.example.interviewpractise.data.viewModel.CartViewModel
 import com.example.interviewpractise.databinding.FragmentProductDetailBinding
 import com.example.interviewpractise.presentation.adapters.ProductImagesAdapter
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ProductDetailFragment : Fragment() {
 
     private lateinit var binding: FragmentProductDetailBinding
 
     private val args: ProductDetailFragmentArgs by navArgs()
+
+    private val cartViewModel: CartViewModel by viewModels()
 
     private lateinit var currentProduct: Product
 
@@ -36,6 +42,10 @@ class ProductDetailFragment : Fragment() {
         (activity as AppCompatActivity).supportActionBar?.title = "${currentProduct.title}"
 
         updateData()
+
+        binding.addToCart.setOnClickListener {
+            cartViewModel.insertProduct(currentProduct)
+        }
 
     }
 
