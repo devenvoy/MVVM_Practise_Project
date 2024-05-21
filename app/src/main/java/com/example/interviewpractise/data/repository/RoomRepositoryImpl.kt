@@ -26,7 +26,7 @@ class RoomRepositoryImpl @Inject constructor(
         return appDao.getAllProducts()
     }
 
-    override fun updateData(product: Product) {
+    override suspend fun updateData(product: Product) {
         appDao.updateData(product)
     }
 

@@ -17,7 +17,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class ShopFragment : Fragment(), ResponseListener, SearchView.OnQueryTextListener {
+class ShopFragment : Fragment(), ResponseListener {
 
     private lateinit var productsRecyclerAdapter: ProductsRecyclerAdapter
     private lateinit var binding: FragmentShopBinding
@@ -34,9 +34,23 @@ class ShopFragment : Fragment(), ResponseListener, SearchView.OnQueryTextListene
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        binding.search.setOnQueryTextListener(this)
+        binding.search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                myViewModel.searchProduct(newText)
+                return true
+            }
+        })
+
         myViewModel.responseListener = this
         myViewModel.getAllData()
+
+        myViewModel.checkConnection.observe(viewLifecycleOwner) { isOnline ->
+            if(isOnline) myViewModel.getAllData()
+        }
 
         myViewModel.products.observe(viewLifecycleOwner) { response ->
             productsRecyclerAdapter.differ.submitList(response.products)
@@ -70,13 +84,5 @@ class ShopFragment : Fragment(), ResponseListener, SearchView.OnQueryTextListene
         activity?.toast(message ?: "Process Failed")
     }
 
-    override fun onQueryTextSubmit(query: String?): Boolean {
-        return false
-    }
-
-    override fun onQueryTextChange(newText: String?): Boolean {
-        myViewModel.searchProduct(newText)
-        return true
-    }
 
 }

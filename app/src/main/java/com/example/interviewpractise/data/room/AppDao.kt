@@ -13,9 +13,9 @@ import com.example.interviewpractise.data.models.Product
 interface AppDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertProduct(product: List<Product>)
+    suspend fun insertProduct(product: Product)
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addProducts(prodcuts : List<Product>)
 
     @Delete

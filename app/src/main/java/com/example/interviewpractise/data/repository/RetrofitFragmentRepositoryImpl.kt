@@ -25,29 +25,29 @@ class RetrofitFragmentRepositoryImpl @Inject constructor(
 
     suspend fun getAllProducts() {
         val result = apiServices.getAllProducts()
-        if (result?.body() != null) {
-            appDao.insertProduct(result.body()!!.products)
+        if (result.body() != null) {
+            appDao.addProducts(result.body()!!.products)
             productLiveData.postValue(result.body())
         }
     }
 
     suspend fun getSearchProducts(query: String?) {
         val result = apiServices.getSearchProducts(query)
-        if (result?.body() != null) {
+        if (result.body() != null) {
             productLiveData.postValue(result.body())
         }
     }
 
     suspend fun getAllCategories() {
         val result = apiServices.getAllCategories()
-        if (result?.body() != null) {
+        if (result.body() != null) {
             categoryLiveData.postValue(result.body())
         }
     }
 
     suspend fun getProductsFromCategory(cat: String) {
         val result = apiServices.getProductsFromCategory(cat)
-        if (result?.body() != null) {
+        if (result.body() != null) {
             productLiveData.postValue(result.body())
         }
     }

@@ -24,7 +24,7 @@ class RetrofitViewModel @Inject constructor(
 
     fun getAllData() {
         responseListener?.onStarted()
-        if (checkConnection.value == true) {
+        if (checkConnection.isOnline()) {
             viewModelScope.launch(Dispatchers.IO) {
                 retrofitFragmentRepository.getAllProducts()
             }
@@ -36,7 +36,7 @@ class RetrofitViewModel @Inject constructor(
 
     fun searchProduct(query: String?) {
         responseListener?.onStarted()
-        if (checkConnection.value == true) {
+        if (checkConnection.isOnline()) {
             viewModelScope.launch(Dispatchers.IO) {
                 retrofitFragmentRepository.getSearchProducts(query)
             }

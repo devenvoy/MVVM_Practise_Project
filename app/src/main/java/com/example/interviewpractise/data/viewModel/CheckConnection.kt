@@ -14,13 +14,11 @@ import javax.inject.Inject
 class CheckConnection @Inject constructor(private var connectivityManager: ConnectivityManager) :
     LiveData<Boolean>() {
 
-
     private val networkRequest: NetworkRequest = NetworkRequest.Builder()
         .addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
         .addTransportType(NetworkCapabilities.TRANSPORT_WIFI)
         .addTransportType(NetworkCapabilities.TRANSPORT_CELLULAR)
         .build()
-
 
 //    constructor(application: Application) : this(
 //        application.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -42,24 +40,19 @@ class CheckConnection @Inject constructor(private var connectivityManager: Conne
                     }
                 }
             }
-            Log.d("-----", "Wifi connected: $isWifiConn")
-            Log.d("-----", "Mobile connected: $isMobileConn")
+//            Log.d("-----", "Wifi connected: $isWifiConn")
+//            Log.d("-----", "Mobile connected: $isMobileConn")
             postValue(true)
         }
-
         override fun onLost(network: Network) {
             super.onLost(network)
             postValue(false)
         }
-
     }
-
 
     init {
-        postValue(false)
         connectivityManager.requestNetwork(networkRequest, networkCallback)
     }
-
 
     override fun onActive() {
         super.onActive()
@@ -71,7 +64,6 @@ class CheckConnection @Inject constructor(private var connectivityManager: Conne
         super.onInactive()
         connectivityManager.unregisterNetworkCallback(networkCallback)
     }
-
 
     fun isOnline(): Boolean {
         val networkInfo: NetworkInfo? = connectivityManager.activeNetworkInfo

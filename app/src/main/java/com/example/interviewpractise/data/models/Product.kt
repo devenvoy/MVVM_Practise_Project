@@ -8,8 +8,8 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 
-@Entity(tableName = "product")
 @Parcelize
+@Entity(tableName = "product")
 data class Product(
 
     @PrimaryKey

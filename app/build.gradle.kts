@@ -4,7 +4,6 @@ plugins {
     alias(libs.plugins.googleGmsGoogleServices)
     id("com.google.dagger.hilt.android")
     id("kotlin-kapt")
-
     id("kotlin-parcelize")
     id("androidx.navigation.safeargs.kotlin")
 }
@@ -96,9 +95,9 @@ dependencies {
     implementation("io.coil-kt:coil:2.6.0")
 
 //    room
-    val roomVersion = "2.1.0"
-    implementation("androidx.room:room-runtime:$roomVersion")
-    kapt("androidx.room:room-compiler:$roomVersion")
+//    implementation("androidx.room:room-runtime:2.6.1")
+    implementation("androidx.room:room-ktx:2.6.1")
+    kapt ("androidx.room:room-compiler:2.6.1")
 
     // dots
     implementation("com.tbuonomo:dotsindicator:5.0")

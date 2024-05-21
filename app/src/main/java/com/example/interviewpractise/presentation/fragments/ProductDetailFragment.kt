@@ -43,9 +43,9 @@ class ProductDetailFragment : Fragment() {
 
         updateData()
 
-        binding.addToCart.setOnClickListener {
-            cartViewModel.insertProduct(currentProduct)
-        }
+//        binding.addToCart.setOnClickListener {
+//            cartViewModel.insertProduct(currentProduct)
+//        }
 
     }
 
