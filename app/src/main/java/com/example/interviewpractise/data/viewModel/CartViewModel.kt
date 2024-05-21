@@ -23,7 +23,7 @@ class CartViewModel @Inject constructor(
 
     fun getAllProduct() {
         CoroutineScope(Dispatchers.IO).launch {
-            _cartList.value = roomRepository.getAllProducts().value
+            _cartList.postValue(roomRepository.getAllProducts().value)
         }
     }
 

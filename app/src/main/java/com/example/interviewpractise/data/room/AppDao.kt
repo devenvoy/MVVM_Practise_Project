@@ -13,16 +13,19 @@ import com.example.interviewpractise.data.models.Product
 interface AppDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertProduct(product: Product)
+    suspend fun insertProduct(product: List<Product>)
+
+    @Insert
+    suspend fun addProducts(prodcuts : List<Product>)
 
     @Delete
-    fun deleteProduct(product: Product)
+    suspend fun deleteProduct(product: Product)
 
     @Query("Select * from product")
     fun getAllProducts(): LiveData<List<Product>>
 
     @Update
-    fun updateData(product: Product)
+    suspend fun updateData(product: Product)
 
     @Query("delete from product")
     fun deleteAll()

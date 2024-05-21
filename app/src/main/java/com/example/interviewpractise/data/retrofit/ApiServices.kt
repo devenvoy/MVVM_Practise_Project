@@ -7,17 +7,15 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiServices {
-
     @GET("products")
     suspend fun getAllProducts(): Response<ProductsResponse>
 
     @GET("products/search")
-    suspend fun getSearchProducts(@Query("q") query: String): Response<ProductsResponse>
+    suspend fun getSearchProducts(@Query("q") query: String?): Response<ProductsResponse>
 
     @GET("products/categories")
     suspend fun getAllCategories(): Response<List<String>>
 
     @GET("products/categories/{category}")
     suspend fun getProductsFromCategory(@Path("category") cat: String): Response<ProductsResponse>
-
 }

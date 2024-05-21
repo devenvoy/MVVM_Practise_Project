@@ -11,5 +11,4 @@ import com.example.interviewpractise.utils.Converters
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun appDao(): AppDao
-
 }

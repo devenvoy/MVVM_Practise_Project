@@ -1,7 +1,6 @@
 package com.example.interviewpractise.presentation.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,28 +35,11 @@ class ShopFragment : Fragment(), ResponseListener, SearchView.OnQueryTextListene
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         binding.search.setOnQueryTextListener(this)
-
         myViewModel.responseListener = this
+        myViewModel.getAllData()
 
-        myViewModel.checkConnection.observe(viewLifecycleOwner) {
-            try {
-                if (it == true) {
-                    binding.netImg.visibility = View.GONE
-                    binding.recyclerView.visibility = View.VISIBLE
-                    myViewModel.getAllData()
-                    setAdapter()
-                } else {
-                    binding.netImg.visibility = View.VISIBLE
-                    binding.recyclerView.visibility = View.GONE
-                }
-            } catch (e: Exception) {
-                Log.e("TAG111", "onViewCreated: " + e.localizedMessage)
-            }
-
-        }
-
-        myViewModel.productsResponse.observe(viewLifecycleOwner) {
-            productsRecyclerAdapter.differ.submitList(it)
+        myViewModel.products.observe(viewLifecycleOwner) { response ->
+            productsRecyclerAdapter.differ.submitList(response.products)
         }
 
     }
@@ -72,15 +54,19 @@ class ShopFragment : Fragment(), ResponseListener, SearchView.OnQueryTextListene
     }
 
     override fun onStarted() {
-//        binding.progrssbar.visibility = View.VISIBLE
+        binding.progrssbar.visibility = View.VISIBLE
+        binding.netImg.visibility = View.GONE
+        setAdapter()
     }
 
     override fun onSuccess() {
         binding.progrssbar.visibility = View.GONE
+        binding.netImg.visibility = View.GONE
     }
 
     override fun onFailure(message: String?) {
         binding.progrssbar.visibility = View.GONE
+        binding.netImg.visibility = View.VISIBLE
         activity?.toast(message ?: "Process Failed")
     }
 
@@ -89,16 +75,8 @@ class ShopFragment : Fragment(), ResponseListener, SearchView.OnQueryTextListene
     }
 
     override fun onQueryTextChange(newText: String?): Boolean {
-        if (newText != null) {
-            searchProduct(newText)
-        }
+        myViewModel.searchProduct(newText)
         return true
-    }
-
-    private fun searchProduct(newText: String) {
-        if (newText.trim() != "") {
-            myViewModel.searchProduct(newText)
-        }
     }
 
 }

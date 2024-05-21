@@ -5,13 +5,15 @@ import com.example.interviewpractise.data.models.Product
 
 interface RoomRepository {
 
-    suspend fun insertProduct(product: Product): Unit
+    suspend fun insertProduct(product: Product)
 
-    suspend fun deleteProduct(product: Product): Unit
+    suspend fun addProducts(products: List<Product>)
 
-    suspend fun getAllProducts(): LiveData<List<Product>>
+    suspend fun deleteProduct(product: Product)
 
-    suspend fun updateData(product: Product): Unit
+    fun getAllProducts(): LiveData<List<Product>>
 
-    suspend fun deleteAll(): Unit
+    suspend fun updateData(product: Product)
+
+    suspend fun deleteAll()
 }

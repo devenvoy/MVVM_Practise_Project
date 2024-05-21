@@ -13,15 +13,20 @@ class RoomRepositoryImpl @Inject constructor(
         appDao.insertProduct(product)
     }
 
+    override suspend fun addProducts(products: List<Product>) {
+        appDao.addProducts(products)
+    }
+
+
     override suspend fun deleteProduct(product: Product) {
         appDao.deleteProduct(product)
     }
 
-    override suspend fun getAllProducts(): LiveData<List<Product>> {
+    override fun getAllProducts(): LiveData<List<Product>> {
         return appDao.getAllProducts()
     }
 
-    override suspend fun updateData(product: Product) {
+    override fun updateData(product: Product) {
         appDao.updateData(product)
     }
 

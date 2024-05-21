@@ -1,52 +1,47 @@
 package com.example.interviewpractise.data.viewModel
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.interviewpractise.data.models.Product
+import com.example.interviewpractise.data.models.ProductsResponse
+import com.example.interviewpractise.data.repository.RetrofitFragmentRepositoryImpl
 import com.example.interviewpractise.domain.repository.ResponseListener
-import com.example.interviewpractise.domain.repository.RetrofitFragmentRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class RetrofitViewModel @Inject constructor(
-    private val retrofitFragmentRepository: RetrofitFragmentRepository,
+    private val retrofitFragmentRepository: RetrofitFragmentRepositoryImpl,
     val checkConnection: CheckConnection
 ) : ViewModel() {
 
     var responseListener: ResponseListener? = null
 
-    private var _productsResponse = MutableLiveData<List<Product>>()
-
-    val productsResponse: LiveData<List<Product>>
-        get() = _productsResponse
+    val products: LiveData<ProductsResponse>
+        get() = retrofitFragmentRepository.productsResponse
 
     fun getAllData() {
-//        responseListener?.onStarted()
-        viewModelScope.launch {
-            val response = retrofitFragmentRepository.getAllProducts()
-            if (response.code() == 200) {
-                _productsResponse.value = response.body()?.products ?: listOf<Product>()
-                responseListener?.onSuccess()
-            } else {
-                responseListener?.onFailure(response.code().toString() + response.message())
+        responseListener?.onStarted()
+        if (checkConnection.value == true) {
+            viewModelScope.launch(Dispatchers.IO) {
+                retrofitFragmentRepository.getAllProducts()
             }
+            responseListener?.onSuccess()
+        } else {
+            responseListener?.onFailure("Network Not Connected")
         }
     }
 
-    fun searchProduct(query: String) {
+    fun searchProduct(query: String?) {
         responseListener?.onStarted()
-        viewModelScope.launch {
-            val response = retrofitFragmentRepository.getSearchProducts(query)
-            if (response.code() == 200) {
-                _productsResponse.value = response.body()?.products ?: arrayListOf()
-                responseListener?.onSuccess()
-            } else {
-                responseListener?.onFailure(response.code().toString() + response.message())
+        if (checkConnection.value == true) {
+            viewModelScope.launch(Dispatchers.IO) {
+                retrofitFragmentRepository.getSearchProducts(query)
             }
+        } else {
+            responseListener?.onFailure("Network Not Connected")
         }
     }
 }
