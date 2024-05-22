@@ -5,7 +5,6 @@ import androidx.room.Room
 import com.example.interviewpractise.data.repository.RoomRepositoryImpl
 import com.example.interviewpractise.data.room.AppDao
 import com.example.interviewpractise.data.room.AppDatabase
-import com.example.interviewpractise.domain.repository.RoomRepository
 import com.example.interviewpractise.utils.DB_NAME
 import dagger.Module
 import dagger.Provides
@@ -31,8 +30,4 @@ object DatabaseModule {
     @Singleton
     fun providesDaoService(db: AppDatabase) = db.appDao()
 
-
-    @Provides
-    @Singleton
-    fun providesRoomRepository(appDao: AppDao): RoomRepository = RoomRepositoryImpl(appDao)
 }

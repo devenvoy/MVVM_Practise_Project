@@ -31,8 +31,8 @@
 
     <ImageView
         android:id="@+id/net_img"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:src="@drawable/network_off"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -53,11 +53,11 @@
         tools:listitem="@layout/product_item" />
 
     <ProgressBar
-        android:id="@+id/progrssbar"
+        android:id="@+id/progressbar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:indeterminate="true"
-        android:indeterminateTint="@color/primary"
+        android:indeterminateTint="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

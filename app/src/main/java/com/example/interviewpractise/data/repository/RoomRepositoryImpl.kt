@@ -1,36 +1,36 @@
 package com.example.interviewpractise.data.repository
 
+import android.util.Log
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import com.example.interviewpractise.data.models.CartItem
+import com.example.interviewpractise.data.models.CartWithProduct
 import com.example.interviewpractise.data.models.Product
 import com.example.interviewpractise.data.room.AppDao
-import com.example.interviewpractise.domain.repository.RoomRepository
 import javax.inject.Inject
 
-class RoomRepositoryImpl @Inject constructor(
+open class RoomRepositoryImpl @Inject constructor(
     private val appDao: AppDao
-) : RoomRepository {
-    override suspend fun insertProduct(product: Product) {
-        appDao.insertProduct(product)
+) {
+
+    fun getAllProducts(): LiveData<List<Product>> {
+        return appDao.getProductData()
     }
 
-    override suspend fun addProducts(products: List<Product>) {
-        appDao.addProducts(products)
-    }
-
-
-    override suspend fun deleteProduct(product: Product) {
-        appDao.deleteProduct(product)
-    }
-
-    override fun getAllProducts(): LiveData<List<Product>> {
-        return appDao.getAllProducts()
-    }
-
-    override suspend fun updateData(product: Product) {
+    suspend fun updateData(product: Product) {
         appDao.updateData(product)
     }
 
-    override suspend fun deleteAll() {
+    suspend fun deleteAll() {
         appDao.deleteAll()
     }
+
+    suspend fun addCart(cartItem: CartItem) {
+        appDao.addCart(cartItem)
+    }
+
+    fun getCartWithProducts(): LiveData<List<CartWithProduct>> {
+        return appDao.getCartData()
+    }
+
 }

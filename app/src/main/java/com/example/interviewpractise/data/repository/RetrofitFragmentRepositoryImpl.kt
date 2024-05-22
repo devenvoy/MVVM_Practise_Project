@@ -1,15 +1,18 @@
 package com.example.interviewpractise.data.repository
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.interviewpractise.data.models.ProductsResponse
 import com.example.interviewpractise.data.retrofit.ApiServices
 import com.example.interviewpractise.data.room.AppDao
+import com.example.interviewpractise.utils.NetworkUtils
 import javax.inject.Inject
 
 class RetrofitFragmentRepositoryImpl @Inject constructor(
     private val apiServices: ApiServices,
-    private val appDao: AppDao
+    private val appDao: AppDao,
+    private val context: Context
 ) {
 
     private val productLiveData = MutableLiveData<ProductsResponse>()
@@ -24,10 +27,18 @@ class RetrofitFragmentRepositoryImpl @Inject constructor(
         get() = categoryLiveData
 
     suspend fun getAllProducts() {
-        val result = apiServices.getAllProducts()
-        if (result.body() != null) {
-            appDao.addProducts(result.body()!!.products)
-            productLiveData.postValue(result.body())
+        if (NetworkUtils.isInternetAvailable(context)) {
+            val result = apiServices.getAllProducts()
+            if (result.body() != null) {
+                appDao.addProducts(result.body()!!.products)
+                productLiveData.postValue(result.body())
+            }
+        } else {
+            val products = appDao.getProductData()
+            if (products.value != null) {
+                val response = ProductsResponse(products = products.value!!)
+                productLiveData.postValue(response)
+            }
         }
     }
 

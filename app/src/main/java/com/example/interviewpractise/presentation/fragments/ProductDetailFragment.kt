@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
+import com.example.interviewpractise.data.models.CartItem
 import com.example.interviewpractise.data.models.Product
 import com.example.interviewpractise.data.viewModel.CartViewModel
 import com.example.interviewpractise.databinding.FragmentProductDetailBinding
@@ -43,13 +44,19 @@ class ProductDetailFragment : Fragment() {
 
         updateData()
 
-//        binding.addToCart.setOnClickListener {
-//            cartViewModel.insertProduct(currentProduct)
-//        }
-
+        binding.addToCart.setOnClickListener {
+            cartViewModel.addCart(
+                CartItem(
+                    0,
+                    cartViewModel.auth.currentUser?.uid ?: "vuvu",
+                    currentProduct.id,
+                    1
+                )
+            )
+        }
     }
 
-    fun updateData() {
+    private fun updateData() {
         val imageAdapter = ProductImagesAdapter()
         imageAdapter.differ.submitList(currentProduct.images)
         binding.productImages.adapter = imageAdapter

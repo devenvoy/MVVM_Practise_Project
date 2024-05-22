@@ -1,10 +1,8 @@
 package com.example.interviewpractise.data.models
 
 import android.os.Parcelable
-import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 
@@ -13,46 +11,26 @@ import kotlinx.parcelize.Parcelize
 data class Product(
 
     @PrimaryKey
-    @SerializedName("id")
-    @ColumnInfo(name = "id") var id: Int? = null,
+    var id: Int,
 
-    @SerializedName("title")
-    @ColumnInfo(name = "title") var title: String? = null,
+    var title: String,
 
-    @SerializedName("description")
-    @ColumnInfo(name = "description")
-    var description: String? = null,
+    var description: String,
 
-    @SerializedName("price")
-    @ColumnInfo(name = "price")
-    var price: Int? = null,
+    var price: Int,
 
-    @SerializedName("discountPercentage")
-    @ColumnInfo(name = "discountPercentage")
-    var discountPercentage: Double? = null,
+    var discountPercentage: Double,
 
-    @SerializedName("rating")
-    @ColumnInfo(name = "rating")
-    var rating: Double? = null,
+    var rating: Double,
 
-    @SerializedName("stock")
-    @ColumnInfo(name = "stock")
-    var stock: Int? = null,
+    var stock: Int,
 
-    @SerializedName("brand")
-    @ColumnInfo(name = "brand")
-    var brand: String? = null,
+    var brand: String,
 
-    @SerializedName("category")
-    @ColumnInfo(name = "category")
-    var category: String? = null,
+    var category: String,
 
-    @SerializedName("thumbnail")
-    @ColumnInfo(name = "thumbnail")
-    var thumbnail: String? = null,
+    var thumbnail: String,
 
-    @SerializedName("images")
-    @ColumnInfo(name = "images")
     var images: List<String> = listOf()
 
 ) : Parcelable
